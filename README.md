@@ -20,9 +20,17 @@ The app ID to push your code into.
 Can be found using `mapps app:list` command in your terminal or in the dev center. This will deploy monday code to the latest draft version of that app (if you also have only live / deprecated versions, this will fail)
 
 
+## `force`
+
+**Optional**
+
+Force deploying to live version.
+
+
+
 ## Example usage
 ```
-name: Deploy to monday code
+name: Deploy app to monday
 
 on:
   push:
@@ -35,8 +43,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Deploy to monday code
-        uses: mondaycom/monday-code-deploy-action@master
+      - name: Deploy app to monday
+        uses: mondaycom/monday-app-deploy-action@master
         with:
           token: ${{ secrets.MONDAY_TOKEN }}
           appId: 10110073

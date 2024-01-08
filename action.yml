@@ -1,5 +1,5 @@
 # action.yml
-name: 'Monday Code Deploy'
+name: 'Monday App Deploy'
 description: 'Deploy app to Monday code'
 inputs:
   token:
@@ -8,9 +8,14 @@ inputs:
   appId:
     description: 'The ID of your monday app'
     required: true
+  force:
+    description: 'Force deploy to live version'
+    required: false
+    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
   - ${{ inputs.token }}
   - ${{ inputs.appId }}
+  - ${{ inputs.force }}

@@ -2,6 +2,14 @@
 
 TOKEN=$1
 APP_ID=$2
+FORCE=$3
 
 mapps init -t $TOKEN
-mapps code:push -a $APP_ID
+
+
+if [ "$FORCE" = "true" ]; then
+  mapps app:deploy -f -a $APP_ID
+else
+  mapps app:deploy -a $APP_ID
+fi
+
