@@ -18,4 +18,5 @@ runs:
   args:
   - ${{ inputs.token }}
   - ${{ inputs.appId }}
+  - ${{ inputs.versionId }}
   - ${{ inputs.force }}
