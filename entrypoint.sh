@@ -8,8 +8,8 @@ mapps init -t $TOKEN
 
 
 if [ "$FORCE" = "true" ]; then
-  mapps app:deploy -f -a $APP_ID --verbose
+  mapps app:deploy -f -a $APP_ID
 else
-  mapps app:deploy -a $APP_ID --verbose
+  mapps app:deploy -a $APP_ID
 fi
 
