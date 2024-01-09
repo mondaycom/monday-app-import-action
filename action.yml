@@ -7,7 +7,10 @@ inputs:
     required: true
   appId:
     description: 'The ID of your monday app'
-    required: true
+    required: false
+  versionId:
+    description: 'The version ID of your monday app'
+    required: false
   force:
     description: 'Force deploy to live version'
     required: false
