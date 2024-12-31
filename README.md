@@ -1,4 +1,4 @@
-# Monday Code Deploy Script
+# Monday Manifest Import Script
 
 This script is used to import your manifest to your Monday app using the `mapps` CLI tool.
 
@@ -41,6 +41,27 @@ Ensure you have the following:
 ```bash
 ./mapps_deploy_script.sh abc123-token 10110073 20210004 true ./manifest.json
 ```
+
+### Example Usage in a Workflow
+
+```yaml
+name: Import app from manifest
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Import app from manifest
+        run: |
+          ./mapps_deploy_script.sh ${{ secrets.MONDAY_TOKEN }} 10110073 20210004 false ./manifest.json
+``` 
 
 ### Script Functionality
 
