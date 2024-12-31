@@ -1,61 +1,53 @@
-# Monday Code deploy action
-This action deploys your project to your monday app
+# Monday Code Deploy Script
 
-## Inputs
+This script is used to import your manifest to your Monday app using the `mapps` CLI tool.
 
-## `token`
+## Prerequisites
 
-**Required** 
+Ensure you have the following:
+- A valid Monday developer token.
+- Access to the `mapps` CLI installed and configured on your machine.
 
-Monday developer token.
+## Script Usage
 
-Can be acquired here: https://<your-monday-subdomain>.monday.com/apps/manage/tokens
+### Arguments
 
-## `appId`
+1. **`TOKEN`** (Required)  
+   Your Monday developer token.  
+   Can be acquired here: https://<your-monday-subdomain>.monday.com/apps/manage/tokens
 
-**Optional if versionId provided** 
+2. **`APP_ID`** (Mandatory if `VERSION_ID` is provided)  
+   The app ID to update.  
+   Can be found using the `mapps app:list` command or in the Developer Center.
 
-The app ID to push your code into.
+3. **`VERSION_ID`** (Optional)  
+   The version ID to update, will create new version if this param will be empty.  
+   Can be found using the `mapps app-version:list` command or in the Developer Center.
 
-Can be found using `mapps app:list` command in your terminal or in the dev center. This will deploy monday code to the latest draft version of that app (if you also have only live / deprecated versions, this will fail)
+4. **`NEW`** (Optional)  
+   Set to `true` if you want to create a new app.
 
+5. **`MANIFEST_PATH`** (Required)  
+   The path to the manifest file (./manifest.json).
 
-## `versionId`
+### Command Example
 
-**Optional if appId provided**
-
-The version ID to push your code into.
-
-Can be found using `mapps app-version:list` command in your terminal or in the dev center. This will deploy monday code to the given version of that app
-
-
-## `force`
-
-**Optional**
-
-Force deploying to live version.
-
-
-
-## Example usage
-```
-name: Deploy app to monday
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Deploy app to monday
-        uses: mondaycom/monday-app-deploy-action@master
-        with:
-          token: ${{ secrets.MONDAY_TOKEN }}
-          appId: 10110073
+```bash
+./mapps_deploy_script.sh <TOKEN> <APP_ID> <VERSION_ID> <NEW> <MANIFEST_PATH>
 ```
 
+#### Example:
+
+```bash
+./mapps_deploy_script.sh abc123-token 10110073 20210004 true ./manifest.json
+```
+
+### Script Functionality
+
+1. Initializes the `mapps` CLI with the provided token.
+2. Checks and prepares arguments for:
+   - App ID (`-a`)
+   - Version ID (`-i`)
+   - New app creation (`-n`)
+   - Manifest path (`-p`)
+3. Runs the `mapps manifest:import` command with the provided arguments.
