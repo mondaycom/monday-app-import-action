@@ -3,10 +3,10 @@
 TOKEN=$1
 APP_ID=$2
 VERSION_ID=$3
-NEW=$4
-MANIFEST_PATH=$5
+FORCE=$4
 
 mapps init -t $TOKEN
+
 
 if [ -z "$APP_ID" ]; then
   APP_ID_ARG=""
@@ -17,15 +17,15 @@ fi
 if [ -z "$VERSION_ID" ]; then
   VERSION_ID_ARG=""
 else
-  VERSION_ID_ARG="-i $VERSION_ID"
+  VERSION_ID_ARG="-v $VERSION_ID"
 fi
 
-if [ "$NEW" = "true" ]; then
-  NEW_ARG="-n"
+if [ -z "$FORCE" ]; then
+  FORCE_ARG=""
 else
-  NEW_ARG=""
+  FORCE_ARG="-f"
 fi
 
-mapps manifest:import -p "$MANIFEST_PATH" $APP_ID_ARG $VERSION_ID_ARG $NEW_ARG
+mapps app:deploy $APP_ID_ARG $VERSION_ID_ARG $FORCE_ARG
 
 
