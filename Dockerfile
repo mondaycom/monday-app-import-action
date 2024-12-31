@@ -4,7 +4,7 @@
 
 FROM node:20-alpine
 
-RUN npm install -g @mondaycom/apps-cli
+RUN npm install -g @mondaycom/apps-cli@4.4.0-beta.5
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
