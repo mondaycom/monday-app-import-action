@@ -1,6 +1,5 @@
-# action.yml
-name: 'Monday App Deploy'
-description: 'Deploy app to Monday code'
+name: 'Monday App Import'
+description: 'Import app from manifest file'
 inputs:
   token:
     description: 'Monday developer token'
@@ -11,10 +10,13 @@ inputs:
   versionId:
     description: 'The version ID of your monday app'
     required: false
-  force:
-    description: 'Force deploy to live version'
+  new:
+    description: 'Create new app'
     required: false
     default: false
+  manifestPath:
+    description: 'Path to the manifest file'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -22,4 +24,5 @@ runs:
   - ${{ inputs.token }}
   - ${{ inputs.appId }}
   - ${{ inputs.versionId }}
-  - ${{ inputs.force }}
+  - ${{ inputs.new }}
+  - ${{ inputs.manifestPath }}
