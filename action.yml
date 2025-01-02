@@ -17,6 +17,10 @@ inputs:
   manifestPath:
     description: 'Path to the manifest file'
     required: true
+  promote:
+    description: 'Promote the version to Live'
+    required: false
+    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -26,3 +30,4 @@ runs:
   - ${{ inputs.versionId }}
   - ${{ inputs.new }}
   - ${{ inputs.manifestPath }}
+  - ${{ inputs.promote }}
