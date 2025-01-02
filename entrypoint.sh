@@ -27,3 +27,4 @@ else
 fi
 
 mapps manifest:import -p "$MANIFEST_PATH" $APP_ID_ARG $VERSION_ID_ARG $NEW_ARG
+mapps app:promote $APP_ID_ARG $VERSION_ID_ARG
