@@ -30,16 +30,19 @@ Ensure you have the following:
 5. **`MANIFEST_PATH`** (Required)  
    The path to the manifest file (./manifest.json).
 
+6. **`PROMOTE`** (Optional)  
+   'true' for promoting the version to live after importing
+
 ### Command Example
 
 ```bash
-./mapps_deploy_script.sh <TOKEN> <APP_ID> <VERSION_ID> <NEW> <MANIFEST_PATH>
+./mapps_deploy_script.sh <TOKEN> <APP_ID> <VERSION_ID> <NEW> <MANIFEST_PATH> <PROMOTE>
 ```
 
 #### Example:
 
 ```bash
-./mapps_deploy_script.sh abc123-token 10110073 20210004 true ./manifest.json
+./mapps_deploy_script.sh abc123-token 10110073 20210004 false ./manifest.json true
 ```
 
 ### Example Usage in a Workflow
@@ -60,7 +63,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Import app from manifest
         run: |
-          ./mapps_deploy_script.sh ${{ secrets.MONDAY_TOKEN }} 10110073 20210004 false ./manifest.json
+          ./mapps_deploy_script.sh ${{ secrets.MONDAY_TOKEN }} 10110073 20210004 false ./manifest.json true
 ``` 
 
 ### Script Functionality
@@ -72,3 +75,4 @@ jobs:
    - New app creation (`-n`)
    - Manifest path (`-p`)
 3. Runs the `mapps manifest:import` command with the provided arguments.
+4. Runs the `mapps app:promote` command with the if promote=true.
