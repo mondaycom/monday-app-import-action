@@ -56,7 +56,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  import:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
